@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { fetchBooks } from "../../redux/features/book";
-import { Box } from "@material-ui/core";
+import { Box, CircularProgress } from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
 import { fetchUsersId } from "../../redux/features/users";
@@ -50,7 +50,11 @@ export default function MyBooks({ myBooks }) {
   }, [dispatch]);
 
   if (loading) {
-    return <div>loading...</div>;
+    return (
+      <div style={{paddingLeft: "50%", marginTop: 100}}>
+        <CircularProgress  />
+      </div>
+    );
   }
   if (error) {
     return <div>{error}</div>;
@@ -59,10 +63,10 @@ export default function MyBooks({ myBooks }) {
   if (auth) {
     return (
       <Box className={classes.content}>
-        <ul className={style.cards}>
+        <Box className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
           {books.map((item) => {
             return (
-              <li>
+              <Box className="col" align="center">
                 <a href="" className={style.card}>
                   <img src={item.img} className={style.card__image} alt="" />
                   <div className={style.card__overlay}>
@@ -87,10 +91,10 @@ export default function MyBooks({ myBooks }) {
                     </p>
                   </div>
                 </a>
-              </li>
+              </Box>
             );
           })}
-        </ul>
+        </Box>
       </Box>
     );
   }
