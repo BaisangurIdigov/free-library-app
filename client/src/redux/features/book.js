@@ -1,10 +1,30 @@
 const initialState = {
   loading: false,
   items: [],
+  currentItem: [],
   error: null,
 };
 export default function books(state = initialState, action) {
   switch (action.type) {
+    case "byId/book/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "byId/book/fulfilled":
+      return {
+        ...state,
+        loading: false,
+        currentItem: action.payload,
+      };
+    case "byId/book/rejected":
+      return {
+        ...state,
+        loading: false,
+        currentItem: [],
+        error: action.error,
+      };
+
     case "create/book/pending":
       return {
         ...state,
@@ -23,7 +43,6 @@ export default function books(state = initialState, action) {
         items: [],
         error: action.error,
       };
-
     case "all/book/pending":
       return {
         ...state,
@@ -130,3 +149,24 @@ export const createBook = ({ name, img, description }) => {
     }
   };
 };
+
+export const fetchBookById = ({id}) => {
+  return async (dispatch) => {
+    dispatch({ type: "byId/book/pending" });
+
+    try {
+      const response = await fetch(`/book/${id}`);
+      const json = await response.json();
+      if (json.error) {
+        dispatch({
+          type: "byId/book/rejected",
+          error: "При запросе на сервер произошла ошибка",
+        });
+      } else {
+        dispatch({ type: "byId/book/fulfilled", payload: json });
+      }
+    } catch (e) {
+      dispatch({ type: "byId/book/rejected", error: e.toString() });
+    }
+  }
+}

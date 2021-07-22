@@ -6,6 +6,7 @@ import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
 import {CircularProgress} from '@material-ui/core'
 import HoverRating from './Rating'
+import { NavLink } from 'react-router-dom'
 
 const useStyles = makeStyles((themes) => ({
   content: {
@@ -49,7 +50,7 @@ export default function HomePage({ values }) {
         {books.map((item) => {
           return (
             <Box className="col" align="center">
-              <a href="" className={style.card}>
+              <NavLink to={`/book/${item._id}`} className={style.card}>
                 <img src={item.img} className={style.card__image} alt="" />
                 <div className={style.card__overlay}>
                   <div className={style.card__header}>
@@ -69,8 +70,9 @@ export default function HomePage({ values }) {
                     <span className={style.card__status}>{item.name}</span>
                   </div>
                   <p className={style.card__description}>{item.description}</p>
+                  <p className={style.card__description}>{item.rating}</p>
                 </div>
-              </a>
+              </NavLink>
             </Box>
           );
         })}
