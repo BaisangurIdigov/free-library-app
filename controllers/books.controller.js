@@ -9,11 +9,26 @@ module.exports.booksController = {
     const books = await Books.find({
       user: req.user.id,
     }).populate("user");
-
     res.json(books);
   },
 
-  getBookById:  async (req, res) => {
+
+
+  getRendBooks: async (req, res) => {
+    const {id} = req.params
+    const books = await Books.findById(id)
+
+    if (req.user.id === ){
+      await res.json(books);
+      console.log(books)
+    }
+
+
+  },
+
+
+
+  getBookById: async (req, res) => {
     const books = await Books.findById(req.params.id).populate("user");
     res.json(books);
   },
