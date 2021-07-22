@@ -152,12 +152,16 @@ export default function Layout({ children }) {
               <ListItemText primary="Главная" />
             </ListItem>
           </NavLink>
-          <ListItem button text="text">
-            <ListItemIcon>
-              <ContactsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Вы читаете" />
-          </ListItem>
+
+          <NavLink to="/rentBook" style={{ textDecoration: "none"}}>
+            <ListItem button text="text">
+              <ListItemIcon>
+                <ContactsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Вы читаете" />
+            </ListItem>
+          </NavLink>
+
           <NavLink to="/MyBooks" style={{ textDecoration: "none" }}>
             <ListItem button text="text">
               <ListItemIcon>

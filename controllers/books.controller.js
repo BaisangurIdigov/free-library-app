@@ -53,18 +53,16 @@ module.exports.booksController = {
     // exp
     // save()
 
-    if (authorization) {
-      try {
-        const books = await Books.findById({ id });
-        Books.rend = {
-          userRender: req.params.id,
-          expires,
-        };
-        await books.save();
-        return res.json(books);
-      } catch (e) {
-        return res.status(401).json("неверны тип токена");
-      }
+    try {
+      const books = await Books.findById(id);
+      books.rend = {
+        userRend: req.params.id,
+        expires: 10,
+      };
+      await books.save();
+      return res.json(books);
+    } catch (e) {
+      return res.status(401).json(e.toString());
     }
   },
 };
