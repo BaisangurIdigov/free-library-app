@@ -70,6 +70,7 @@ export default function HomePage({ values }) {
                     <span className={style.card__status}>{item.name}</span>
                   </div>
                   <p className={style.card__description}>{item.description}</p>
+                  <p className={style.card__description}>{item.rating}</p>
                 </div>
               </NavLink>
             </Box>

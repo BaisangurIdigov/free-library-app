@@ -20,7 +20,7 @@ const bookSchema = new Schema(
       ref: "User",
     },
     rating: {
-      type: String,
+      type: Number,
     },
     rend: mongoose.Schema(
       {
