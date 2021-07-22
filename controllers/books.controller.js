@@ -12,6 +12,12 @@ module.exports.booksController = {
 
     res.json(books);
   },
+
+  getBookById:  async (req, res) => {
+    const books = await Books.findById(req.params.id).populate("user");
+    res.json(books);
+  },
+
   deleteBooks: async (req, res) => {
     const { id } = req.params;
     try {
@@ -46,13 +52,6 @@ module.exports.booksController = {
   },
   rendBook: async (req, res) => {
     const { id } = req.params;
-
-    // get the book by id
-    // book.rend = {
-    // userRend: ...,
-    // exp
-    // save()
-
     try {
       const books = await Books.findById(id);
       books.rend = {

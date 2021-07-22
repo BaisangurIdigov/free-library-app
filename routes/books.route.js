@@ -4,6 +4,7 @@ const authMiddleware = require('../models/middlewares/auth.middlewares')
 const router = Router()
 
 router.get('/book', booksController.getBooks)
+router.get('/book/:id', authMiddleware ,booksController.getBookById)
 router.get('/books',authMiddleware, booksController.getAllBooks)
 router.post('/books/:id/rend', authMiddleware ,booksController.rendBook)
 router.post('/books', authMiddleware ,booksController.createBooks)
