@@ -10,6 +10,8 @@ import SearchInput from "./pages/SearchInput";
 import HomeSearch from './pages/HomeSearch'
 import Layout from './Layout'
 import { RentedBooks } from './pages/RentedBooks';
+import { Book } from '@material-ui/icons'
+import BookReviews from './pages/BookReviews'
 
 function App(props) {
   const token = useSelector((state) => state.application.token);
@@ -54,6 +56,10 @@ function App(props) {
 
           <Route path="/rentBook" exact>
             <RentedBooks/>
+          </Route>
+
+          <Route path="/book/:id" exact>
+            <BookReviews/>
           </Route>
 
           <Redirect to="/" />
