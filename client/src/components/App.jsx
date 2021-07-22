@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import SearchInput from "./pages/SearchInput";
 import HomeSearch from './pages/HomeSearch'
 import Layout from './Layout'
+import { RentedBooks } from './pages/RentedBooks';
 
 function App(props) {
   const token = useSelector((state) => state.application.token);
@@ -49,6 +50,10 @@ function App(props) {
           <Route path="/MyBooks" exact>
             <SearchInput setMyBooks={setMyBooks} />
             <MyBooks myBooks={myBooks} />
+          </Route>
+
+          <Route path="/rentBook" exact>
+            <RentedBooks/>
           </Route>
 
           <Redirect to="/" />
