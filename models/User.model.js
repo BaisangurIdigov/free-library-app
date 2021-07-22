@@ -15,7 +15,7 @@ const userSchema = new Schema(
       required:true,
     },
     wallet: {
-      type: String,
+      type: Number,
     },
 },
   { timestamps: true }
