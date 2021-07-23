@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBook } from "../../redux/features/book";
+import { addRendBook, fetchBook } from "../../redux/features/book";
 import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
-import { CircularProgress } from "@material-ui/core";
-import HoverRating from "./RatingBooks";
+import { Button, CircularProgress } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+
 
 const useStyles = makeStyles((themes) => ({
   content: {
@@ -29,6 +29,10 @@ export default function HomePage({ values }) {
   });
   const error = useSelector((state) => state.books.error);
 
+  const handleAddRendBook = (id) => {
+    dispatch(addRendBook(id));
+  };
+
   useEffect(() => {
     dispatch(fetchBook());
   }, [dispatch]);
@@ -50,7 +54,7 @@ export default function HomePage({ values }) {
         {books.map((item) => {
           return (
             <Box className="col" align="center">
-              <NavLink to={`/book/${item._id}`} className={style.card}>
+              <div className={style.card}>
                 <img src={item.img} className={style.card__image} alt="" />
                 <div className={style.card__overlay}>
                   <div className={style.card__header}>
@@ -65,14 +69,17 @@ export default function HomePage({ values }) {
                       src={item.user.img}
                       alt=""
                     />
-
                     <h3 className={style.card__title}>{item.user.login}</h3>
                     <span className={style.card__status}>{item.name}</span>
                   </div>
                   <p className={style.card__description}>{item.description}</p>
                   <p className={style.card__description}>{item.rating}</p>
+                  <NavLink to={`/book/${item._id}`}>
+                    <Button>{"Открыть"}</Button>
+                  </NavLink>
+                  <Button  onClick={()=>handleAddRendBook(item._id)}>{"+"}</Button>
                 </div>
-              </NavLink>
+              </div>
             </Box>
           );
         })}

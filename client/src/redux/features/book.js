@@ -1,3 +1,4 @@
+
 const initialState = {
   loading: false,
   items: [],
@@ -92,6 +93,27 @@ export default function books(state = initialState, action) {
         items: action.payload,
       };
     case "rend/book/rejected":
+      return {
+        ...state,
+        loading: false,
+        items: [],
+        error: action.error,
+      };
+
+
+    case "add/rend/book/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "add/rend/book/fulfilled":
+      return {
+        ...state,
+        loading: false,
+        items: action.payload.id
+
+      };
+    case "add/rend/book/rejected":
       return {
         ...state,
         loading: false,
@@ -221,3 +243,33 @@ export const fetchBookRend = () => {
     }
   }
 }
+
+
+export const addRendBook = (id) => {
+  return async (dispatch, useState) => {
+    const state = useState()
+    dispatch({ type: "add/rend/book/pending" });
+    try {
+      const response = await fetch(`/books/${id}/rend`,{
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${state.application.token}`,
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      })
+      const json = await response.json();
+      if (json.error) {
+        dispatch({
+          type: "add/rend/book/rejected",
+          error: "При запросе на сервер произошла ошибка",
+        });
+      } else {
+        dispatch({ type: "add/rend/book/fulfilled", payload: id });
+      }
+
+    } catch (e) {
+      dispatch({ type: "add/rend/book/rejected", error: e.toString() });
+    }
+  }
+}
+
