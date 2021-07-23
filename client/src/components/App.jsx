@@ -12,6 +12,9 @@ import Layout from './Layout'
 import { RentedBooks } from './pages/RentedBooks';
 import { Book } from '@material-ui/icons'
 import BookReviews from './pages/BookReviews'
+import { CircularProgress } from '@material-ui/core'
+
+
 
 function App(props) {
   const token = useSelector((state) => state.application.token);
