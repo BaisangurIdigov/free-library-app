@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchBook } from "../../redux/features/book";
 import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
-import {CircularProgress} from '@material-ui/core'
-import HoverRating from './Rating'
-import { NavLink } from 'react-router-dom'
+import { CircularProgress } from "@material-ui/core";
+import HoverRating from "./Rating";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((themes) => ({
   content: {
@@ -35,8 +35,8 @@ export default function HomePage({ values }) {
 
   if (loading) {
     return (
-      <div style={{paddingLeft: "50%", marginTop: 100}}>
-        <CircularProgress  />
+      <div style={{ paddingLeft: "50%", marginTop: 100 }}>
+        <CircularProgress />
       </div>
     );
   }

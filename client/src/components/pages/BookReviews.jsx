@@ -1,10 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBookById, fetchBooks } from "../../redux/features/book";
+import { fetchBookById } from "../../redux/features/book";
 import { auth } from "../../redux/features/application";
-import { Button, InputBase, Paper, TextField } from '@material-ui/core'
+import {
+  Button,
+  CircularProgress,
+  InputBase,
+  Paper,
+} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import { Rating } from "@material-ui/lab";
 const useStyle = makeStyles((theme) => ({
   content: {
     width: "70%",
@@ -17,21 +24,31 @@ const useStyle = makeStyles((theme) => ({
     width: 300,
   },
   root: {
-    padding: '2px 4px',
-    display: 'flex',
-    alignItems: 'center',
-    width: "100%"
+    padding: "1px 2px",
+    display: "flex",
+    alignItems: "center",
+    width: "88%",
+    height: "100%"
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
-    width: "100%"
+    width: "100%",
   },
   Button: {
-    marginLeft: 50
+    width: "100%",
   },
-  divider: {
-
+  rating: {
+    marginBottom: 5,
+    padding: 3,
+    height: "100%"
+  },
+  display: {
+    display: "flex",
+    justifyContent: 'space-between',
+    padding: "1px 2px",
+    alignItems: "center",
+    width: "100%",
   },
 }));
 
@@ -40,10 +57,36 @@ function BookReviews(props) {
   const dispatch = useDispatch();
   const classes = useStyle();
   const books = useSelector((state) => state.books.currentItem);
-  console.log(books);
+  const loading = useSelector((state) => state.books.loading);
+  const [value, setValue] = useState(0);
+  const [comment, setComment] = useState("");;
   useEffect(() => {
     dispatch(fetchBookById({ id }));
   }, [dispatch]);
+
+  // const handleRating =()=> {
+  //   dispatch(fetchRating({value}))
+  // }
+
+  // const handleComment =()=> {
+  //   dispatch(fetchComment({comment}))
+  // }
+
+  const handleChangeRating = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleChangeComment = (e) => {
+    setComment(e.target.value);
+  };
+
+  if (loading) {
+    return (
+      <div style={{ paddingLeft: "50%", marginTop: 100 }}>
+        <CircularProgress />
+      </div>
+    );
+  }
 
   if (auth) {
     return (
@@ -71,16 +114,43 @@ function BookReviews(props) {
               </div>
             </div>
           </div>
-          <Paper component="form" className={classes.root}>
-            <InputBase
-              className={classes.input}
-              placeholder="Comments"
-              inputProps={{ "aria-label": "search google maps" }}
-            />
-            <Button variant="contained" color="primary" className={classes.Button}>
-              Добавить
-            </Button>
-          </Paper>
+          <Box className={classes.display}>
+            <Paper mb={3} borderColor="transparent" className={classes.rating}>
+              <Rating
+                name="simple-controlled"
+                value={value}
+                onChange={handleChangeRating}
+              />
+              <Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.Button}
+                >
+                  Добавить
+                </Button>
+              </Box>
+            </Paper>
+            <Paper component="form" className={classes.root}>
+              <InputBase
+                className={classes.input}
+                placeholder="Comments"
+                inputProps={{ "aria-label": "search google maps" }}
+                multiline
+                rows={1}
+                onChange={handleChangeComment}
+              />
+              <Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.Button}
+                >
+                  Добавить
+                </Button>
+              </Box>
+            </Paper>
+          </Box>
         </div>
       </>
     );

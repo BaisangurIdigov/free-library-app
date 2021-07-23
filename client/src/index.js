@@ -12,7 +12,7 @@ render(
         <div
           style={{
             backgroundImage:
-              "url(https://p4.wallpaperbetter.com/wallpaper/388/965/236/paper-cardboard-texture-parchment-the-texture-of-the-paper-hd-wallpaper-preview.jpg)",
+              "url(https://oir.mobi/uploads/posts/2021-03/1616430148_40-p-zadnii-fon-dlya-saita-46.jpg)",
             height: 4000,
           }}
         >

@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { fetchBooks } from "../../redux/features/book";
-import { Box, CircularProgress } from '@material-ui/core'
+import { Box, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
 import { fetchUsersId } from "../../redux/features/users";
 import { auth } from "../../redux/features/application";
+import { NavLink } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -51,8 +52,8 @@ export default function MyBooks({ myBooks }) {
 
   if (loading) {
     return (
-      <div style={{paddingLeft: "50%", marginTop: 100}}>
-        <CircularProgress  />
+      <div style={{ paddingLeft: "50%", marginTop: 100 }}>
+        <CircularProgress />
       </div>
     );
   }
@@ -67,7 +68,7 @@ export default function MyBooks({ myBooks }) {
           {books.map((item) => {
             return (
               <Box className="col" align="center">
-                <a href="" className={style.card}>
+                <NavLink to={`/book/${item._id}`} className={style.card}>
                   <img src={item.img} className={style.card__image} alt="" />
                   <div className={style.card__overlay}>
                     <div className={style.card__header}>
@@ -90,7 +91,7 @@ export default function MyBooks({ myBooks }) {
                       {item.description}
                     </p>
                   </div>
-                </a>
+                </NavLink>
               </Box>
             );
           })}
