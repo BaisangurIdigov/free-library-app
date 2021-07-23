@@ -36,8 +36,7 @@ const bookSchema = new Schema(
           type: Date,
         },
       },
-      { timestamps: true },
-
+      { timestamps: true }
     ),
   },
   { timestamps: true }

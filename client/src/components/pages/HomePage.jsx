@@ -5,7 +5,7 @@ import { fetchBook } from "../../redux/features/book";
 import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
 import { CircularProgress } from "@material-ui/core";
-import HoverRating from "./Rating";
+import HoverRating from "./RatingBooks";
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((themes) => ({
