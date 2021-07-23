@@ -79,6 +79,25 @@ export default function books(state = initialState, action) {
         items: [],
         error: action.error,
       };
+
+    case "rend/book/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "rend/book/fulfilled":
+      return {
+        ...state,
+        loading: false,
+        items: action.payload,
+      };
+    case "rend/book/rejected":
+      return {
+        ...state,
+        loading: false,
+        items: [],
+        error: action.error,
+      };
     default:
   }
   return state;
@@ -132,7 +151,7 @@ export const fetchBook = () => {
 
 export const createBook = ({ name, img, description }) => {
   return async (dispatch, useState) => {
-    const state = useState()
+    const state = useState();
     dispatch({ type: "create/book/pending" });
     try {
       await fetch("/books", {
@@ -143,14 +162,17 @@ export const createBook = ({ name, img, description }) => {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
-      dispatch({ type: "create/book/fulfilled", payload: { name, img, description } });
+      dispatch({
+        type: "create/book/fulfilled",
+        payload: { name, img, description },
+      });
     } catch (e) {
-      dispatch({ type: "create/book/rejected", error: e.toString() })
+      dispatch({ type: "create/book/rejected", error: e.toString() });
     }
   };
 };
 
-export const fetchBookById = ({id}) => {
+export const fetchBookById = ({ id }) => {
   return async (dispatch) => {
     dispatch({ type: "byId/book/pending" });
 
@@ -167,6 +189,35 @@ export const fetchBookById = ({id}) => {
       }
     } catch (e) {
       dispatch({ type: "byId/book/rejected", error: e.toString() });
+    }
+  };
+};
+
+export const fetchBookRend = () => {
+  return async (dispatch, useState ) => {
+    const state = useState()
+
+    dispatch({ type: "rend/book/pending" });
+    try {
+      const response = await fetch("/books/rend",{
+        headers: {
+          Authorization: `Bearer ${state.application.token}`,
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      })
+      const json = await response.json();
+      if (json.error) {
+        dispatch({
+          type: "rend/book/rejected",
+          error: "При запросе на сервер произошла ошибка",
+        });
+      } else {
+        dispatch({ type: "rend/book/fulfilled", payload: json });
+
+      }
+
+    } catch (e) {
+      dispatch({ type: "rend/book/rejected", error: e.toString() });
     }
   }
 }
