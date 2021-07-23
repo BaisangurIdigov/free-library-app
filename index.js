@@ -10,8 +10,8 @@ app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(require('./routes/users.route'))
-app.use(require('./routes/books.route'))
+app.use(require('./routes/index.route'))
+
 
 const URL = process.env.URL
 const PORT = process.env.PORT

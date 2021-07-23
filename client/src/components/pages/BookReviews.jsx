@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import { Rating } from "@material-ui/lab";
+import { postReviews } from '../../redux/features/review'
 const useStyle = makeStyles((theme) => ({
   content: {
     width: "70%",
@@ -68,9 +69,9 @@ function BookReviews(props) {
   //   dispatch(fetchRating({value}))
   // }
 
-  // const handleComment =()=> {
-  //   dispatch(fetchComment({comment}))
-  // }
+  const handleComment =()=> {
+    dispatch(postReviews({comment, id}))
+  }
 
   const handleChangeRating = (e) => {
     setValue(e.target.value);
@@ -126,6 +127,7 @@ function BookReviews(props) {
                   variant="contained"
                   color="primary"
                   className={classes.Button}
+                  // onClick={handleRating}
                 >
                   Добавить
                 </Button>
@@ -145,11 +147,15 @@ function BookReviews(props) {
                   variant="contained"
                   color="primary"
                   className={classes.Button}
+                  onClick={handleComment}
                 >
                   Добавить
                 </Button>
               </Box>
             </Paper>
+          </Box>
+          <Box>
+            <Paper>asdasd</Paper>
           </Box>
         </div>
       </>

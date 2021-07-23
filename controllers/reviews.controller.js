@@ -11,7 +11,8 @@ module.exports.reviewsController = {
     const { id } = req.params
     try {
       const review = await Review.create({
-        user: id,
+        book: id,
+        user: req.user.id,
         text,
       })
 
