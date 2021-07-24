@@ -9,11 +9,13 @@ module.exports.reviewsController = {
     const { text } = req.body
     const { id } = req.params
     try {
-      const review = await Review.create({
+      const created = await Review.create({
         book: id,
         user: req.user.id,
         text,
       })
+
+       const review = await Review.findById(created._id).populate('user')
 
       return res.json(review)
     } catch (e) {

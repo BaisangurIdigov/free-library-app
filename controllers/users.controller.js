@@ -9,7 +9,7 @@ module.exports.userController = {
   },
   getUsersId: async (req, res) => {
 
-    const user = await User.findById(req.user.id)
+    const user = await User.findById(req.user.id, { password: 0 })
     await res.json(user)
   },
 

@@ -17,7 +17,7 @@ module.exports.ratingController = {
       await rating.save()
       return res.json(rating)
     } catch (e) {
-      return res.status(401).json(e.toString())
+      return res.status(401).json(console.log(e.toString()))
     }
   },
 }
