@@ -10,9 +10,8 @@ import SearchInput from "./pages/SearchInput";
 import HomeSearch from './pages/HomeSearch'
 import Layout from './Layout'
 import { RentedBooks } from './pages/RentedBooks';
-import { Book } from '@material-ui/icons'
 import BookReviews from './pages/BookReviews'
-import { CircularProgress } from '@material-ui/core'
+
 
 
 

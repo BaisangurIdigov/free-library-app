@@ -2,8 +2,7 @@ const Review = require("../models/Review.model")
 
 module.exports.reviewsController = {
   getReview: async (req, res)=> {
-    const reviews = await Review.find()
-
+    const reviews = await Review.find({ book: req.params.id }).populate("user").populate("book")
     res.json(reviews)
   },
   createReview: async (req, res) => {

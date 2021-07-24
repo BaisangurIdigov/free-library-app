@@ -4,7 +4,7 @@ const { reviewsController } = require("../controllers/reviews.controller")
 
 const router = Router()
 
-router.get("/reviews", reviewsController.getReview)
+router.get("/reviews/:id", reviewsController.getReview)
 router.post("/reviews/:id", authMiddleware ,reviewsController.createReview)
 router.delete("/reviews/:id", reviewsController.deleteReview)
 

@@ -19,9 +19,6 @@ const bookSchema = new Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
     },
-    rating: {
-      type: Number,
-    },
     rend: mongoose.Schema(
       {
         _id: false,
