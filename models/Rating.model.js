@@ -4,6 +4,7 @@ const ratingSchema = new Schema(
   {
     number: {
       type: Number,
+      required: true
     },
     user: {
       type: Schema.Types.ObjectId,

@@ -7,7 +7,6 @@ import Box from "@material-ui/core/Box";
 import { Button, CircularProgress } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 
-
 const useStyles = makeStyles((themes) => ({
   content: {
     width: "70%",

@@ -5,6 +5,24 @@ const initialState = {
 };
 export default function review(state = initialState, action) {
   switch (action.type) {
+    case "get/review/pending":
+      return {
+        ...state,
+        loading: true
+      }
+    case "get/review/fulfilled":
+      return {
+        ...state,
+        loading: false,
+        items: action.payload
+      }
+    case "get/review/rejected":
+      return {
+        ...state,
+        loading: false,
+        items: [],
+        error: action.error,
+      }
     case "create/review/pending":
       return {
         ...state,
@@ -13,11 +31,38 @@ export default function review(state = initialState, action) {
     case "create/review/fulfilled":
       return {
         ...state,
-        loading: true,
+        loading: false,
         items: [...state.items, action.payload]
+      }
+    case "create/review/rejected":
+      return {
+        ...state,
+        loading: false,
+        items: [],
+        error: action.error,
       }
     default:
       return state;
+  }
+}
+
+export const fetchReviews =({id})=> {
+  return async (dispatch) => {
+    dispatch({ type: "get/review/pending" })
+    try {
+      const response = await fetch(`/reviews/${id}`)
+      const json = await response.json()
+      if (json.error) {
+        dispatch({
+          type: "get/review/rejected",
+          error: "При запросе на сервер произошла ошибка",
+        });
+      } else {
+        dispatch({ type: "get/review/fulfilled", payload: json });
+      }
+    } catch (e) {
+      dispatch({ type: "get/review/rejected", error: e.toString() })
+    }
   }
 }
 
