@@ -10,7 +10,7 @@ import SearchInput from "./pages/SearchInput";
 import HomeSearch from './pages/HomeSearch'
 import Layout from './Layout'
 import { RentedBooks } from './pages/RentedBooks';
-import BookReviews from './pages/BookReviews'
+import Book from './pages/BookDirectory/Book'
 
 
 
@@ -61,7 +61,7 @@ function App(props) {
           </Route>
 
           <Route path="/book/:id" exact>
-            <BookReviews/>
+            <Book/>
           </Route>
 
           <Redirect to="/" />

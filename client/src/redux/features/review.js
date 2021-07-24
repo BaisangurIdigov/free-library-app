@@ -29,6 +29,7 @@ export default function review(state = initialState, action) {
         loading: true
       }
     case "create/review/fulfilled":
+      console.log(action)
       return {
         ...state,
         loading: false,
@@ -72,7 +73,7 @@ export const postReviews =({comment, id})=> {
     const text = comment
     dispatch({ type: "create/review/pending"})
     try {
-      await fetch(`/reviews/${id}`, {
+      const response = await fetch(`/reviews/${id}`, {
         method: "POST",
         body: JSON.stringify({ text }),
         headers: {
@@ -80,7 +81,8 @@ export const postReviews =({comment, id})=> {
           "Content-type": "application/json; charset=UTF-8",
         },
       })
-      dispatch({ type: "create/review/fulfilled", payload: { text } })
+      const json = await response.json()
+      dispatch({ type: "create/review/fulfilled", payload: json })
     } catch (e) {
       dispatch({ type: "create/review/rejected", error: e.toString() })
     }
