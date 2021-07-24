@@ -6,6 +6,8 @@ import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
 import { Button, CircularProgress } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import { fetchUsersId } from "../../redux/features/users";
+import { logger } from "redux-logger/src";
 
 const useStyles = makeStyles((themes) => ({
   content: {
@@ -27,6 +29,10 @@ export default function HomePage({ values }) {
     );
   });
   const error = useSelector((state) => state.books.error);
+  const userId = useSelector((state) => state.users.items._id);
+
+
+
 
   const handleAddRendBook = (id) => {
     dispatch(addRendBook(id));
@@ -34,6 +40,10 @@ export default function HomePage({ values }) {
 
   useEffect(() => {
     dispatch(fetchBook());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchUsersId());
   }, [dispatch]);
 
   if (loading) {
@@ -73,10 +83,15 @@ export default function HomePage({ values }) {
                   </div>
                   <p className={style.card__description}>{item.description}</p>
                   <p className={style.card__description}>{item.rating}</p>
-                  <NavLink to={`/book/${item._id}`}>
+                  <NavLink
+                    style={{ textDecoration: "none" }}
+                    to={`/book/${item._id}`}
+                  >
                     <Button>{"Открыть"}</Button>
                   </NavLink>
-                  <Button  onClick={()=>handleAddRendBook(item._id)}>{"+"}</Button>
+                  <Button onClick={() => handleAddRendBook(item._id)}>
+                    {userId === item.rend?.userRend ? "✔" : "+"}
+                  </Button>
                 </div>
               </div>
             </Box>

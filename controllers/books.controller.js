@@ -64,9 +64,10 @@ module.exports.booksController = {
     try {
       const books = await Books.findById(id);
       books.rend = {
-        userRend: req.params.id,
+        userRend: req.user.id,
         expires: 10,
       };
+      console.log(req.user.id)
       await books.save();
       return res.json(books);
     } catch (e) {

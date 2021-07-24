@@ -16,7 +16,8 @@ render(
            backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            height: '100vh'
+            height: '100vh',
+            backgroundAttachment: 'fixed'
           }}
         >
           <App />

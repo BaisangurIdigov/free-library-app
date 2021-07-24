@@ -1,4 +1,3 @@
-
 const initialState = {
   loading: false,
   items: [],
@@ -100,7 +99,6 @@ export default function books(state = initialState, action) {
         error: action.error,
       };
 
-
     case "add/rend/book/pending":
       return {
         ...state,
@@ -110,8 +108,7 @@ export default function books(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        items: action.payload.id
-
+        items: [...state.items, action.payload]
       };
     case "add/rend/book/rejected":
       return {
@@ -216,17 +213,17 @@ export const fetchBookById = ({ id }) => {
 };
 
 export const fetchBookRend = () => {
-  return async (dispatch, useState ) => {
-    const state = useState()
+  return async (dispatch, useState) => {
+    const state = useState();
 
     dispatch({ type: "rend/book/pending" });
     try {
-      const response = await fetch("/books/rend",{
+      const response = await fetch("/books/rend", {
         headers: {
           Authorization: `Bearer ${state.application.token}`,
           "Content-type": "application/json; charset=UTF-8",
-        }
-      })
+        },
+      });
       const json = await response.json();
       if (json.error) {
         dispatch({
@@ -235,28 +232,25 @@ export const fetchBookRend = () => {
         });
       } else {
         dispatch({ type: "rend/book/fulfilled", payload: json });
-
       }
-
     } catch (e) {
       dispatch({ type: "rend/book/rejected", error: e.toString() });
     }
-  }
-}
-
+  };
+};
 
 export const addRendBook = (id) => {
   return async (dispatch, useState) => {
-    const state = useState()
+    const state = useState();
     dispatch({ type: "add/rend/book/pending" });
     try {
-      const response = await fetch(`/books/${id}/rend`,{
+      const response = await fetch(`/books/${id}/rend`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${state.application.token}`,
           "Content-type": "application/json; charset=UTF-8",
-        }
-      })
+        },
+      });
       const json = await response.json();
       if (json.error) {
         dispatch({
@@ -264,12 +258,10 @@ export const addRendBook = (id) => {
           error: "При запросе на сервер произошла ошибка",
         });
       } else {
-        dispatch({ type: "add/rend/book/fulfilled", payload: id });
+        dispatch({ type: "add/rend/book/fulfilled", payload: json });
       }
-
     } catch (e) {
       dispatch({ type: "add/rend/book/rejected", error: e.toString() });
     }
-  }
-}
-
+  };
+};
