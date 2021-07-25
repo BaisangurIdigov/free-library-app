@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { auth } from "../../redux/features/application";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookRend } from "../../redux/features/book";
-import { Box } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import style from "./style.module.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { NavLink } from 'react-router-dom'
@@ -25,6 +25,10 @@ export function RentedBooks(props) {
   useEffect(() => {
     dispatch(fetchBookRend());
   }, [dispatch]);
+
+  const handleReturningABook =(id) => {
+    dispatch(returningABook(id))
+  }
 
   if (auth) {
     return (
@@ -55,6 +59,12 @@ export function RentedBooks(props) {
                     <p className={style.card__description}>
                       {item.description}
                     </p>
+                    <Button
+                    className={style.card__description}
+                    onClick={() => handleReturningABook(item._id)}
+                    >
+                    Вернуть книгу
+                    </Button>
                   </div>
                 </NavLink>
               </Box>
