@@ -67,11 +67,26 @@ module.exports.booksController = {
         userRend: req.user.id,
         expires: 10,
       };
-      console.log(req.user.id)
       await books.save();
-      return res.json(books);
+      await res.json(books);
     } catch (e) {
       return res.status(401).json(e.toString());
     }
   },
+
+  rendReturnBook: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const books = await Books.findById(id);
+
+       books.rend = null
+      await books.save()
+
+      return res.json(books);
+
+    } catch (e) {
+      return res.status(401).json(e.toString());
+    }
+  }
 };
+

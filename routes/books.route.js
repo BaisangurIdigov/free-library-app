@@ -10,5 +10,6 @@ router.get('/books',authMiddleware, booksController.getAllBooks)
 router.post('/books/:id/rend', authMiddleware ,booksController.rendBook)
 router.post('/books', authMiddleware ,booksController.createBooks)
 router.delete('/books/:id', authMiddleware ,booksController.deleteBooks)
+router.delete('/rend/books/:id', authMiddleware, booksController.rendReturnBook)
 
 module.exports = router

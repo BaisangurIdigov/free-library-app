@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { auth } from "../../redux/features/application";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBookRend } from "../../redux/features/book";
+import { fetchBookRend, returningABook } from "../../redux/features/book";
 import { Box, Button } from "@material-ui/core";
 import style from "./style.module.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -26,9 +26,9 @@ export function RentedBooks(props) {
     dispatch(fetchBookRend());
   }, [dispatch]);
 
-  const handleReturningABook =(id) => {
-    dispatch(returningABook(id))
-  }
+  const handleReturningABook = (id) => {
+    dispatch(returningABook(id));
+  };
 
   if (auth) {
     return (
