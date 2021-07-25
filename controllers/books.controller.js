@@ -69,9 +69,20 @@ module.exports.booksController = {
       };
       console.log(req.user.id)
       await books.save();
-      return res.json(books);
     } catch (e) {
       return res.status(401).json(e.toString());
     }
   },
+
+  rendReturnBook: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const books = await Books.findById(id);
+      await books.rend.remove()
+      return res.json(books);
+    } catch (e) {
+      return res.status(401).json(e.toString());
+    }
+  }
 };
+

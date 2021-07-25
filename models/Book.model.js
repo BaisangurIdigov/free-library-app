@@ -15,6 +15,9 @@ const bookSchema = new Schema(
       type: String,
       required: true,
     },
+    price: {
+      type: Number
+    },
     user: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
