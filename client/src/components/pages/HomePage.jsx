@@ -7,6 +7,7 @@ import Box from "@material-ui/core/Box";
 import { Button, CircularProgress, Paper } from '@material-ui/core'
 import { NavLink } from "react-router-dom";
 import { fetchUsersId } from "../../redux/features/users";
+import { logger } from "redux-logger/src";
 
 const useStyles = makeStyles((themes) => ({
   content: {
@@ -59,7 +60,7 @@ export default function HomePage({ values }) {
         {books.map((item) => {
           return (
             <Box className="col" align="center">
-              <Paper elevation={20} className={style.card}>
+              <div className={style.card}>
                 <img src={item.img} className={style.card__image} alt="" />
                 <div className={style.card__overlay}>
                   <div className={style.card__header}>
