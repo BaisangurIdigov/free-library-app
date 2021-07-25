@@ -91,7 +91,6 @@ function Book(props) {
                     <Box className={classes.text}>{item.text}</Box>
                   </Paper>
                 </>
-
               );
             })}
           </Box>
