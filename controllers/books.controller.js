@@ -67,8 +67,8 @@ module.exports.booksController = {
         userRend: req.user.id,
         expires: 10,
       };
-      console.log(req.user.id)
       await books.save();
+      await res.json(books);
     } catch (e) {
       return res.status(401).json(e.toString());
     }
@@ -78,8 +78,12 @@ module.exports.booksController = {
     const { id } = req.params;
     try {
       const books = await Books.findById(id);
-      await books.rend.remove()
+
+       books.rend = null
+      await books.save()
+
       return res.json(books);
+
     } catch (e) {
       return res.status(401).json(e.toString());
     }
