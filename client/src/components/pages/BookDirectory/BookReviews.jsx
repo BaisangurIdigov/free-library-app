@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import { Button, InputBase, Paper } from '@material-ui/core'
-import Box from '@material-ui/core/Box'
-import { postReviews } from '../../../redux/features/review'
-import { useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
-import { useParams } from 'react-router'
-
+import React, { useState } from "react";
+import { Button, InputBase, Paper } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import { postReviews } from "../../../redux/features/review";
+import { useDispatch } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import { useParams } from "react-router";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -26,8 +25,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-
-function BookReviews (props) {
+function BookReviews(props) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const classes = useStyle();
@@ -64,7 +62,7 @@ function BookReviews (props) {
         </Button>
       </Box>
     </Paper>
-  )
+  );
 }
 
-export default BookReviews
+export default BookReviews;
