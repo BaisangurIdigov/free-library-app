@@ -31,9 +31,6 @@ export default function HomePage({ values }) {
   const error = useSelector((state) => state.books.error);
   const userId = useSelector((state) => state.users.items._id);
 
-
-
-
   const handleAddRendBook = (id) => {
     dispatch(addRendBook(id));
   };
