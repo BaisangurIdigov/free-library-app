@@ -45,15 +45,20 @@ function ModalBookCreate({ opened, setOpened }) {
   const classes = useStyle();
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
+  const [price, setPrice] = useState("")
   const [description, setDescription] = useState("");
   const dispatch = useDispatch()
 
   const clear = () => {
     setName('')
     setImg('')
+    setPrice('')
     setDescription('')
   };
   const handleChangeBook = (e) => {
+    setName(e.target.value);
+  };
+  const handleChangePrice = (e) => {
     setName(e.target.value);
   };
   const handleChangeImg = (e) => {
@@ -108,6 +113,18 @@ function ModalBookCreate({ opened, setOpened }) {
                 value={description}
               />
             </Box>
+            <Box style={{ marginTop: 20 }}>
+              <TextField
+                id="outlined-multiline-static"
+                label="$ Цена"
+                multiline
+                style={{ width: 500 }}
+                variant="outlined"
+                onChange={handleChangePrice}
+                value={price}
+              />
+            </Box>
+
             <Box className={classes.buttons}>
               <Button variant="outlined" color="primary" onClick={clear}>
                 Отмена

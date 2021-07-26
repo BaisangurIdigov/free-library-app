@@ -83,11 +83,9 @@ function Book(props) {
             {reviews.map((item) => {
               return (
                 <>
-                  <Paper className={classes.avatar}>
-                    <Avatar alt="Remy Sharp" src={item.user.img} />
-                    <Box style={{padding: 10}}>{item.user.login}</Box>
-                  </Paper>
                   <Paper className={classes.comments}>
+                    <Avatar alt="Remy Sharp" src={item.user.img} />
+                    <Box style={{padding: 10}}>{item.user.login}{' '}│</Box>
                     <Box className={classes.text}>{item.text}</Box>
                   </Paper>
                 </>

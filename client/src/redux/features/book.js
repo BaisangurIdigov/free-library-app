@@ -1,5 +1,7 @@
 const initialState = {
   loading: false,
+  addingToRend: false,
+  returning:false,
   items: [],
   currentItem: [],
   error: null,
@@ -102,13 +104,22 @@ export default function books(state = initialState, action) {
     case "add/rend/book/pending":
       return {
         ...state,
-        loading: true,
+        addingToRend: true,
       };
     case "add/rend/book/fulfilled":
       return {
         ...state,
-        loading: false,
-        items: state.items
+        addingToRend: false,
+        items: state.items.map((item) => {
+          if (item._id === action.payload._id) {
+            return {
+              ...item,
+              rend: action.payload.rend,
+            };
+          }
+
+          return item;
+        }),
       };
     case "add/rend/book/rejected":
       return {
@@ -121,14 +132,13 @@ export default function books(state = initialState, action) {
     case "return/rend/book/pending":
       return {
         ...state,
-        loading: true,
+       returning: false
       };
     case "return/rend/book/fulfilled":
       return {
         ...state,
-        loading: false,
+        returning:false,
         items: state.items.filter((item) => item._id !== action.payload._id),
-
       };
     case "return/rend/book/rejected":
       return {
@@ -188,14 +198,14 @@ export const fetchBook = () => {
   };
 };
 
-export const createBook = ({ name, img, description }) => {
+export const createBook = ({ name, img, description, price }) => {
   return async (dispatch, useState) => {
     const state = useState();
     dispatch({ type: "create/book/pending" });
     try {
       await fetch("/books", {
         method: "POST",
-        body: JSON.stringify({ name, img, description }),
+        body: JSON.stringify({ name, img, description, price }),
         headers: {
           Authorization: `Bearer ${state.application.token}`,
           "Content-type": "application/json; charset=UTF-8",
@@ -203,7 +213,7 @@ export const createBook = ({ name, img, description }) => {
       });
       dispatch({
         type: "create/book/fulfilled",
-        payload: { name, img, description },
+        payload: { name, img, description, price },
       });
     } catch (e) {
       dispatch({ type: "create/book/rejected", error: e.toString() });

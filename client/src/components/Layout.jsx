@@ -108,9 +108,10 @@ export default function Layout({ children }) {
   if (auth){
     return (
       <div className={classes.root}>
-        <CssBaseline />
+        <CssBaseline/>
         <AppBar
           position="fixed"
+          style={{backgroundColor:'#4B0082'}}
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
@@ -144,12 +145,12 @@ export default function Layout({ children }) {
             paper: classes.drawerPaper,
           }}
         >
-          <div className={classes.drawerHeader}>
+          <div className={classes.drawerHeader} >
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
                 <ChevronLeftIcon />
               ) : (
-                <ChevronRightIcon />
+                <ChevronRightIcon  />
               )}
             </IconButton>
           </div>
