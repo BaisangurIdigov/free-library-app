@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { auth } from "../../redux/features/application";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookRend, returningABook } from "../../redux/features/book";
-import { Box, Button } from "@material-ui/core";
+import { Box, Button, CircularProgress, Paper } from '@material-ui/core'
 import style from "./style.module.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { NavLink } from 'react-router-dom'
@@ -20,6 +20,7 @@ const useStyles = makeStyles((themes) => ({
 export function RentedBooks(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.books.loading);
   const books = useSelector((state) => state.books.items);
   const users = useSelector((state) => state.users.items);
   useEffect(() => {
@@ -30,6 +31,14 @@ export function RentedBooks(props) {
     dispatch(returningABook(id));
   };
 
+  if (loading) {
+    return (
+      <div style={{ paddingLeft: "50%", marginTop: 100 }}>
+        <CircularProgress />
+      </div>
+    );
+  }
+  console.log(books)
   if (auth) {
     return (
       <Box className={classes.content}>
@@ -37,7 +46,7 @@ export function RentedBooks(props) {
           {books.map((item) => {
             return (
               <Box className="col" align="center">
-                <NavLink to={`/book/${item._id}`} className={style.card}>
+                <Paper className={style.card}>
                   <img src={item.img} className={style.card__image} alt="" />
                   <div className={style.card__overlay}>
                     <div className={style.card__header}>
@@ -66,7 +75,7 @@ export function RentedBooks(props) {
                     Вернуть книгу
                     </Button>
                   </div>
-                </NavLink>
+                </Paper>
               </Box>
             );
           })}

@@ -108,7 +108,7 @@ export default function books(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        items: [...state.items, action.payload]
+        items: state.items
       };
     case "add/rend/book/rejected":
       return {
@@ -127,7 +127,8 @@ export default function books(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        items: [...state.items, action.payload]
+        items: state.items.filter((item) => item._id !== action.payload._id),
+
       };
     case "return/rend/book/rejected":
       return {
@@ -288,7 +289,7 @@ export const addRendBook = (id) => {
 export const returningABook = (id) => {
   return async (dispatch, useState) => {
     const state = useState();
-    dispatch({ type: "add/rend/book/pending" });
+    dispatch({ type: "return/rend/book/pending" });
     try {
       const response = await fetch(`/rend/books/${id}`, {
         method: "DELETE",
@@ -300,14 +301,14 @@ export const returningABook = (id) => {
       const json = await response.json();
       if (json.error) {
         dispatch({
-          type: "add/rend/book/rejected",
+          type: "return/rend/book/rejected",
           error: "При запросе на сервер произошла ошибка",
         });
       } else {
-        dispatch({ type: "add/rend/book/fulfilled", payload: json });
+        dispatch({ type: "return/rend/book/fulfilled", payload: json });
       }
     } catch (e) {
-      dispatch({ type: "add/rend/book/rejected", error: e.toString() });
+      dispatch({ type: "return/rend/book/rejected", error: e.toString() });
     }
   };
 };

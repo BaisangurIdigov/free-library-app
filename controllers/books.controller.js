@@ -80,9 +80,9 @@ module.exports.booksController = {
       const books = await Books.findById(id);
 
        books.rend = null
-      await books.save()
+       await books.save()
 
-      return res.json(books);
+      return await res.json(books);
 
     } catch (e) {
       return res.status(401).json(e.toString());

@@ -20,8 +20,10 @@ import Crop54Icon from "@material-ui/icons/Crop54";
 import { NavLink } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { useDispatch } from "react-redux";
-import { exit } from "../redux/features/application";
+import { useDispatch, useSelector } from 'react-redux'
+import { auth, exit } from '../redux/features/application'
+import { Avatar } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
 
 const drawerWidth = 240;
 
@@ -79,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  display: {
+    marginLeft: "80%"
+  }
 }));
 
 export default function Layout({ children }) {
@@ -86,6 +91,7 @@ export default function Layout({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const users = useSelector(state => state.users.items)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -99,104 +105,111 @@ export default function Layout({ children }) {
     dispatch(exit());
   };
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Демократичная Библиотека
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </div>
-        <Divider />
+  if (auth){
+    return (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              Демократичная Библиотека
+            </Typography>
+            <Box className={classes.display}>
+                <NavLink to="/profile">
+                  <Avatar alt="Remy Sharp" src={users?.img} />
+                </NavLink>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <div className={classes.drawerHeader}>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </div>
+          <Divider />
 
-        <List>
-          <NavLink to="/" style={{ textDecoration: "none" }}>
-            <ListItem button text="text">
-              <ListItemIcon>
-                <Crop54Icon />
-              </ListItemIcon>
-              <ListItemText primary="Главная" />
-            </ListItem>
-          </NavLink>
+          <List>
+            <NavLink to="/" style={{ textDecoration: "none" }}>
+              <ListItem button text="text">
+                <ListItemIcon>
+                  <Crop54Icon />
+                </ListItemIcon>
+                <ListItemText primary="Главная" />
+              </ListItem>
+            </NavLink>
 
-          <NavLink to="/rentBook" style={{ textDecoration: "none"}}>
-            <ListItem button text="text">
-              <ListItemIcon>
-                <ContactsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Вы читаете" />
-            </ListItem>
-          </NavLink>
+            <NavLink to="/rentBook" style={{ textDecoration: "none"}}>
+              <ListItem button text="text">
+                <ListItemIcon>
+                  <ContactsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Вы читаете" />
+              </ListItem>
+            </NavLink>
 
-          <NavLink to="/MyBooks" style={{ textDecoration: "none" }}>
-            <ListItem button text="text">
-              <ListItemIcon>
-                <ContactsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Мои книги" />
-            </ListItem>
-          </NavLink>
-          <NavLink to="/profile" style={{ textDecoration: "none" }}>
-            <ListItem button text="text">
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItem>
-          </NavLink>
-          <NavLink to="/signup" style={{ textDecoration: "none" }}>
-            <ListItem button text="text" onClick={handleExit}>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary="Exit" />
-            </ListItem>
-          </NavLink>
-        </List>
+            <NavLink to="/MyBooks" style={{ textDecoration: "none" }}>
+              <ListItem button text="text">
+                <ListItemIcon>
+                  <ContactsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Мои книги" />
+              </ListItem>
+            </NavLink>
+            <NavLink to="/profile" style={{ textDecoration: "none" }}>
+              <ListItem button text="text">
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                <ListItemText primary="Profile" />
+              </ListItem>
+            </NavLink>
+            <NavLink to="/signup" style={{ textDecoration: "none" }}>
+              <ListItem button text="text" onClick={handleExit}>
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Exit" />
+              </ListItem>
+            </NavLink>
+          </List>
 
-        <Divider />
-      </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        {children}
-      </main>
-    </div>
-  );
+          <Divider />
+        </Drawer>
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open,
+          })}
+        >
+          {children}
+        </main>
+      </div>
+    );
+  }
 }

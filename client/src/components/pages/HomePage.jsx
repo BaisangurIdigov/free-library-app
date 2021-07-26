@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRendBook, fetchBook } from "../../redux/features/book";
 import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
-import { Button, CircularProgress } from "@material-ui/core";
+import { Button, CircularProgress, Paper } from '@material-ui/core'
 import { NavLink } from "react-router-dom";
 import { fetchUsersId } from "../../redux/features/users";
-import { logger } from "redux-logger/src";
 
 const useStyles = makeStyles((themes) => ({
   content: {
@@ -60,7 +59,7 @@ export default function HomePage({ values }) {
         {books.map((item) => {
           return (
             <Box className="col" align="center">
-              <div className={style.card}>
+              <Paper elevation={20} className={style.card}>
                 <img src={item.img} className={style.card__image} alt="" />
                 <div className={style.card__overlay}>
                   <div className={style.card__header}>
@@ -86,15 +85,15 @@ export default function HomePage({ values }) {
                   >
                     <Button>{"Открыть"}</Button>
                   </NavLink>
-                  <Button onClick={() => handleAddRendBook(item._id)}>
+                  <Button onClick={()=> handleAddRendBook(item._id)}>
                     {userId === item.rend?.userRend ? "✔" : "+"}
                   </Button>
                 </div>
-              </div>
+              </Paper>
             </Box>
           );
         })}
       </Box>
     </Box>
-  );
+  )
 }
