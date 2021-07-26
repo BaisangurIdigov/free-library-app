@@ -62,8 +62,8 @@ body {
     padding: 1em;
     border-radius: calc(var(--curve) * 1px) 0 0 0;
     background-color: var(--surface-color);
-    transform: translateY(-100%);
-    transition: .2s ease-in-out;
+    /*transform: translateY(-100%);*/
+    /*transition: .2s ease-in-out;*/
 }
 
 .card__arc {

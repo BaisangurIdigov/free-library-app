@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { fetchBooks } from "../../redux/features/book";
-import { Box, CircularProgress } from "@material-ui/core";
+import { Box, CircularProgress, Paper } from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
 import { fetchUsersId } from "../../redux/features/users";
@@ -39,6 +39,7 @@ export default function MyBooks({ myBooks }) {
       (item) => item.name.toLowerCase().indexOf(myBooks.toLowerCase()) !== -1
     );
   });
+  console.log(books)
   const error = useSelector((state) => state.books.error);
   const users = useSelector((state) => state.users.items);
 
@@ -68,7 +69,8 @@ export default function MyBooks({ myBooks }) {
           {books.map((item) => {
             return (
               <Box className="col" align="center">
-                <NavLink to={`/book/${item._id}`} className={style.card}>
+                <NavLink to={`/book/${item._id}`}>
+                  <Paper elevation={20} className={style.card}>
                   <img src={item.img} className={style.card__image} alt="" />
                   <div className={style.card__overlay}>
                     <div className={style.card__header}>
@@ -91,6 +93,7 @@ export default function MyBooks({ myBooks }) {
                       {item.description}
                     </p>
                   </div>
+                  </Paper>
                 </NavLink>
               </Box>
             );
