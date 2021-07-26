@@ -100,6 +100,7 @@ export default function HomePage({ values }) {
                       variant="contained"
                       color="primary"
                       disabled={addingToRend}
+                      style={{marginBottom:10, marginLeft:5}}
                     >
                       ADD
                     </Button>
