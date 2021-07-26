@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRendBook, fetchBook } from "../../redux/features/book";
 import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
-import { Button, CircularProgress, Paper } from '@material-ui/core'
+import { Button, CircularProgress, Paper } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { fetchUsersId } from "../../redux/features/users";
+import { logger } from "redux-logger/src";
 
 const useStyles = makeStyles((themes) => ({
   content: {
@@ -16,12 +17,18 @@ const useStyles = makeStyles((themes) => ({
     marginLeft: "15%",
     marginRight: "15%",
   },
+  buttonAdd:{
+    color: 'green',
+    fontSize:24,
+    marginLeft: 25,
+  }
 }));
 
 export default function HomePage({ values }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.books.loading);
+  const addingToRend = useSelector((state) => state.books.addingToRend);
   const books = useSelector((state) => {
     return state.books.items.filter(
       (item) => item.name.toLowerCase().indexOf(values.toLowerCase()) !== -1
@@ -59,7 +66,7 @@ export default function HomePage({ values }) {
         {books.map((item) => {
           return (
             <Box className="col" align="center">
-              <Paper elevation={20} className={style.card}>
+              <Paper className={style.card} elevation={20}>
                 <img src={item.img} className={style.card__image} alt="" />
                 <div className={style.card__overlay}>
                   <div className={style.card__header}>
@@ -83,11 +90,20 @@ export default function HomePage({ values }) {
                     style={{ textDecoration: "none" }}
                     to={`/book/${item._id}`}
                   >
-                    <Button>{"Открыть"}</Button>
+                    <Button variant="contained" style={{marginBottom:10}}>Открыть</Button>
                   </NavLink>
-                  <Button onClick={()=> handleAddRendBook(item._id)}>
-                    {userId === item.rend?.userRend ? "✔" : "+"}
-                  </Button>
+                  {item.rend?.userRend ? (
+                    <span className={classes.buttonAdd}>✔</span>
+                  ) : (
+                    <Button
+                      onClick={() => handleAddRendBook(item._id)}
+                      variant="contained"
+                      color="primary"
+                      disabled={addingToRend}
+                    >
+                      ADD
+                    </Button>
+                  )}
                 </div>
               </Paper>
             </Box>
@@ -95,5 +111,5 @@ export default function HomePage({ values }) {
         })}
       </Box>
     </Box>
-  )
+  );
 }

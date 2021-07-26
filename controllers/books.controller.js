@@ -45,7 +45,7 @@ module.exports.booksController = {
   },
 
   createBooks: async (req, res) => {
-    const { img, name, description } = req.body;
+    const { img, name, description, price} = req.body;
 
     try {
       const books = await Books.create({
@@ -53,6 +53,7 @@ module.exports.booksController = {
         img,
         name,
         description,
+        price
       });
       return res.json(books);
     } catch (e) {
