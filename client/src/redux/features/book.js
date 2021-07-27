@@ -1,13 +1,32 @@
 const initialState = {
   loading: false,
   addingToRend: false,
-  returning:false,
+  returning: false,
+  removing: false,
   items: [],
   currentItem: [],
   error: null,
 };
 export default function books(state = initialState, action) {
   switch (action.type) {
+    case "remove/book/pending":
+      return {
+        ...state,
+        removing: true,
+      };
+    case "remove/book/fulfilled":
+      return {
+        ...state,
+        removing: false,
+        items: state.items.filter((item) => item._id !== action.payload)
+      };
+    case "remove/book/rejected":
+      return {
+        ...state,
+        removing: false,
+        items: [],
+        error: action.error,
+      };
     case "byId/book/pending":
       return {
         ...state,
@@ -117,7 +136,6 @@ export default function books(state = initialState, action) {
               rend: action.payload.rend,
             };
           }
-
           return item;
         }),
       };
@@ -132,12 +150,12 @@ export default function books(state = initialState, action) {
     case "return/rend/book/pending":
       return {
         ...state,
-       returning: false
+        returning: true,
       };
     case "return/rend/book/fulfilled":
       return {
         ...state,
-        returning:false,
+        returning: false,
         items: state.items.filter((item) => item._id !== action.payload._id),
       };
     case "return/rend/book/rejected":
@@ -151,6 +169,33 @@ export default function books(state = initialState, action) {
   }
   return state;
 }
+
+export const removeBooks = (id) => {
+  return async (dispatch, useState) => {
+    const state = useState();
+    dispatch({ type: "remove/book/pending" });
+    try {
+      const response = await fetch(`/books/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${state.application.token}`,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      const json = await response.json();
+      if (json.error) {
+        dispatch({
+          type: "remove/book/rejected",
+          error: "При запросе на сервер произошла ошибка",
+        });
+      } else {
+        dispatch({ type: "remove/book/fulfilled", payload: id });
+      }
+    } catch (e) {
+      dispatch({ type: "remove/book/rejected", error: e.toString() });
+    }
+  };
+};
 
 export const fetchBooks = () => {
   return async (dispatch, getState) => {

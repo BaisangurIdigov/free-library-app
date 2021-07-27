@@ -38,7 +38,6 @@ export function RentedBooks(props) {
       </div>
     );
   }
-  console.log(books)
   if (auth) {
     return (
       <Box className={classes.content}>

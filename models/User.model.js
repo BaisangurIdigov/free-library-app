@@ -2,9 +2,9 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
-    img:{
-      type:String
-    },
+    // img:{
+    //   type:String
+    // },
     login: {
       type: String ,
       unique:true,
@@ -14,9 +14,9 @@ const userSchema = new Schema(
       type: String,
       required:true,
     },
-    wallet: {
-      type: Number,
-    },
+    // wallet: {
+    //   type: Number,
+    // },
 },
   { timestamps: true }
 );
