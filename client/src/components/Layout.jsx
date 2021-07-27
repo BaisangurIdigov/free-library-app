@@ -20,10 +20,10 @@ import Crop54Icon from "@material-ui/icons/Crop54";
 import { NavLink } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { useDispatch, useSelector } from 'react-redux'
-import { auth, exit } from '../redux/features/application'
-import { Avatar } from '@material-ui/core'
-import Box from '@material-ui/core/Box'
+import { useDispatch, useSelector } from "react-redux";
+import { auth, exit } from "../redux/features/application";
+import { Avatar } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 
 const drawerWidth = 240;
 
@@ -82,8 +82,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
   },
   display: {
-    marginLeft: "80%"
-  }
+    marginLeft: "80%",
+  },
 }));
 
 export default function Layout({ children }) {
@@ -91,7 +91,7 @@ export default function Layout({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const users = useSelector(state => state.users.items)
+  const users = useSelector((state) => state.users.items);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -105,13 +105,13 @@ export default function Layout({ children }) {
     dispatch(exit());
   };
 
-  if (auth){
+  if (auth) {
     return (
       <div className={classes.root}>
-        <CssBaseline/>
+        <CssBaseline />
         <AppBar
           position="fixed"
-          style={{backgroundColor:'#4B0082'}}
+          style={{ backgroundColor: "#4B0082" }}
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
@@ -130,9 +130,9 @@ export default function Layout({ children }) {
               Демократичная Библиотека
             </Typography>
             <Box className={classes.display}>
-                <NavLink to="/profile">
-                  <Avatar alt="Remy Sharp" src={users?.img} />
-                </NavLink>
+              <NavLink to="/profile">
+                <Avatar alt="Remy Sharp" src={users?.img} />
+              </NavLink>
             </Box>
           </Toolbar>
         </AppBar>
@@ -145,12 +145,12 @@ export default function Layout({ children }) {
             paper: classes.drawerPaper,
           }}
         >
-          <div className={classes.drawerHeader} >
+          <div className={classes.drawerHeader}>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
                 <ChevronLeftIcon />
               ) : (
-                <ChevronRightIcon  />
+                <ChevronRightIcon />
               )}
             </IconButton>
           </div>
@@ -166,7 +166,7 @@ export default function Layout({ children }) {
               </ListItem>
             </NavLink>
 
-            <NavLink to="/rentBook" style={{ textDecoration: "none"}}>
+            <NavLink to="/rentBook" style={{ textDecoration: "none" }}>
               <ListItem button text="text">
                 <ListItemIcon>
                   <ContactsIcon />

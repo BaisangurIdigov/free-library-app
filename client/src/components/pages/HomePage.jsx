@@ -17,9 +17,14 @@ const useStyles = makeStyles((themes) => ({
     marginLeft: "15%",
     marginRight: "15%",
   },
-  buttonAdd:{
-    color: 'green',
-    fontSize:24,
+  buttonAdd: {
+    color: "green",
+    fontSize: 24,
+    marginLeft: 25,
+  },
+  buttonAd: {
+    color: "red",
+    fontSize: 24,
     marginLeft: 25,
   }
 }));
@@ -90,13 +95,18 @@ export default function HomePage({ values }) {
                     style={{ textDecoration: "none" }}
                     to={`/book/${item._id}`}
                   >
-                    <Button variant="contained" style={{marginBottom:10}}>Открыть</Button>
+                    <Button variant="contained" style={{ marginBottom: 10 }}>
+                      Открыть
+                    </Button>
                   </NavLink>
-                  {item.rend?.userRend ? (
+                  {item.rend?.userRend === userId ? (
                     <span className={classes.buttonAdd}>✔</span>
+                  ) : item.rend?.userRend ? (
+                    <span className={classes.buttonAd}>Х</span>
                   ) : (
                     <Button
-                      onClick={() => handleAddRendBook(item._id)}
+                      style={{ marginBottom: 10 }}
+                      onClick={()=> handleAddRendBook(item._id)}
                       variant="contained"
                       color="primary"
                       disabled={addingToRend}

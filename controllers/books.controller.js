@@ -34,8 +34,7 @@ module.exports.booksController = {
 
       if (books.user.toString() === req.user.id) {
         await books.remove();
-
-        return res.json("удалено");
+        return res.json(books);
       }
 
       return res.status(401).json("Ошибка, нет доступа");
