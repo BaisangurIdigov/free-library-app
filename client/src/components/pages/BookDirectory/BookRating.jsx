@@ -4,7 +4,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { Rating } from "@material-ui/lab";
 import { fetchRatings, postRatings } from "../../../redux/features/rating";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -28,7 +28,7 @@ function BookRating(props) {
 
   const handleRating = () => {
     dispatch(postRatings({ value, id }));
-    dispatch(fetchRatings({ id }));
+    // dispatch(fetchRatings({ id }));
     setValue("");
   };
 

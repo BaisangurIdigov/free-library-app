@@ -72,7 +72,7 @@ export const postRatings =({value, id})=> {
     const number = value
     dispatch({ type: "create/rating/pending"})
     try {
-      await fetch(`/rating/${id}`, {
+      const response = await fetch(`/rating/${id}`, {
         method: "POST",
         body: JSON.stringify({ number }),
         headers: {
@@ -80,7 +80,8 @@ export const postRatings =({value, id})=> {
           "Content-type": "application/json; charset=UTF-8",
         },
       })
-      dispatch({ type: "create/rating/fulfilled", payload: { number } })
+      const json = await response.json()
+      dispatch({ type: "create/rating/fulfilled", payload: json})
     } catch (e) {
       dispatch({ type: "create/rating/rejected", error: e.toString() })
     }

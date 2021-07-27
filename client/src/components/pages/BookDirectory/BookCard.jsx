@@ -49,7 +49,6 @@ function BookCard(props) {
             <Typography component="legend">Рейтинг:</Typography>
             <Rating
               name="customized-empty"
-              defaultValue={rating}
               precision={0.5}
               emptyIcon={<StarBorderIcon fontSize="inherit" />}
               value={rating}
