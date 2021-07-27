@@ -13,7 +13,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "30%",
     marginRight: "30%",
     padding: 30,
-    borderRadius: 50
+    borderRadius: 30,
+    left:-50,
+    top:130
   },
   large: {
     width: theme.spacing(30),

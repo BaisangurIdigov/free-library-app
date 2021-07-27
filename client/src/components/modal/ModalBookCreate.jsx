@@ -59,7 +59,7 @@ function ModalBookCreate({ opened, setOpened }) {
     setName(e.target.value);
   };
   const handleChangePrice = (e) => {
-    setName(e.target.value);
+    setPrice(e.target.value);
   };
   const handleChangeImg = (e) => {
     setImg(e.target.value);
@@ -68,8 +68,8 @@ function ModalBookCreate({ opened, setOpened }) {
     setDescription(e.target.value);
   };
   const handleChange =()=> {
-    dispatch(createBook({name, img, description}))
-    console.log({name, img, description})
+    dispatch(createBook({name, img, description,price}))
+
   }
 
   return (
@@ -118,6 +118,7 @@ function ModalBookCreate({ opened, setOpened }) {
                 id="outlined-multiline-static"
                 label="$ Цена"
                 multiline
+                rows={4}
                 style={{ width: 500 }}
                 variant="outlined"
                 onChange={handleChangePrice}
