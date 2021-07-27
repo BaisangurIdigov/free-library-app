@@ -15,18 +15,17 @@ module.exports.userController = {
 
   registerUser: async (req, res) => {
     try {
-      const { img, login, password, wallet } = req.body;
+      const {login, password} = req.body;
       const hash = await bcrypt.hash(
-        password,
+        password.toString(),
         Number(process.env.BCRYPT_ROUNDS)
       );
       const user = await User.create({
-        img: img,
+        // img: img,
         login: login,
         password: hash,
-        wallet: wallet,
+        // wallet: wallet,
       });
-
       if (!login) {
         return res.json({
           error: "login не найден",
@@ -37,8 +36,6 @@ module.exports.userController = {
           error: "password не найден",
         });
       }
-
-
       await res.json(user);
     } catch (e) {
       return res.status(400).json({
