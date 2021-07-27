@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRendBook, fetchBook } from "../../redux/features/book";
 import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
-import { Button, CircularProgress, Paper } from "@material-ui/core";
+import { Button, CircularProgress, Icon, Paper } from '@material-ui/core'
 import { NavLink } from "react-router-dom";
 import { fetchUsersId } from "../../redux/features/users";
-import { logger } from "redux-logger/src";
+import ContactsIcon from '@material-ui/icons/ImportContacts'
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((themes) => ({
   content: {
@@ -96,7 +97,7 @@ export default function HomePage({ values }) {
                     to={`/book/${item._id}`}
                   >
                     <Button variant="contained" style={{ marginBottom: 10 }}>
-                      Открыть
+                      <ContactsIcon />
                     </Button>
                   </NavLink>
                   {item.rend?.userRend === userId ? (
@@ -112,7 +113,7 @@ export default function HomePage({ values }) {
                       disabled={addingToRend}
                       style={{marginBottom:10, marginLeft:5}}
                     >
-                      ADD
+                      <AddIcon/>
                     </Button>
 
                   )}
