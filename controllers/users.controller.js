@@ -1,6 +1,7 @@
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+// const path = require("path");
 
 module.exports.userController = {
   getAllUsers: async (req, res) => {
@@ -72,5 +73,26 @@ module.exports.userController = {
     res.json({
       token: token,
     });
+  },
+
+  avatarAdd: async (req, res) => {
+    const img = req.files.image;
+    const fileName = `./image/${Math.random() * 10000} ${path.extname(
+      img.name
+    )}`
+
+    // img.mv(fileName, async (err) => {
+    //   if (err) {
+    //     return res.status(401).json("ошибка при добавлении авы");
+    //   } else {
+    //     const user = await User.findById(req.user.id);
+    //     user.img = fileName;
+    //     user.save();
+    //     await res.json({
+    //       success: "ава выгружено",
+    //       images: fileName,
+    //     });
+    //   }
+    // });
   },
 };

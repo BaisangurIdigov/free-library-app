@@ -36,6 +36,22 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom:10,
     right: 410
+  },
+  usermail: {
+    position: 'absolute',
+    left: 350,
+    bottom: 200
+  },
+  userphone: {
+    position: 'absolute',
+    left: 350,
+    bottom: 150
+  },
+  sum: {
+    position: 'absolute',
+    left: 350,
+    bottom: 10
+
   }
 }));
 
@@ -67,9 +83,18 @@ function Profile() {
             <div className={classes.userName}>
               <h1>{users.login}</h1>
             </div>
+            <div className={classes.usermail}>
+              <h6>Mail: {" "}{users.mail}</h6>
+            </div>
+            <div className={classes.userphone}>
+              <h6>Phone: {" "}{users.phone}</h6>
+            </div>
             <hr/>
             <div className={classes.userWallet}>
             <h1>${' '}{users.wallet}</h1>
+              <Button  className={classes.sum}>
+                Пополнть счет
+              </Button>
           </div>
           </Box>
           <Box>

@@ -14,6 +14,12 @@ const userSchema = new Schema(
       type: String,
       required:true,
     },
+    mail:{
+      type: String,
+    },
+    phone:{
+      type: String,
+    },
     wallet: {
       type: Number,
     },
