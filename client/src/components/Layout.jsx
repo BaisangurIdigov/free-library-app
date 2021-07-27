@@ -162,7 +162,7 @@ export default function Layout({ children }) {
                 <ListItemIcon>
                   <Crop54Icon />
                 </ListItemIcon>
-                <ListItemText primary="Главная" />
+                <ListItemText style={{color:'#4B0082'}} primary="Главная" />
               </ListItem>
             </NavLink>
 
@@ -171,7 +171,7 @@ export default function Layout({ children }) {
                 <ListItemIcon>
                   <ContactsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Вы читаете" />
+                <ListItemText style={{color:'#4B0082'}} primary="Вы читаете" />
               </ListItem>
             </NavLink>
 
@@ -180,7 +180,7 @@ export default function Layout({ children }) {
                 <ListItemIcon>
                   <ContactsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Мои книги" />
+                <ListItemText style={{color:'#4B0082'}} primary="Мои книги" />
               </ListItem>
             </NavLink>
             <NavLink to="/profile" style={{ textDecoration: "none" }}>
@@ -188,7 +188,7 @@ export default function Layout({ children }) {
                 <ListItemIcon>
                   <PersonIcon />
                 </ListItemIcon>
-                <ListItemText primary="Profile" />
+                <ListItemText style={{color:'#4B0082'}} primary="Профиль" />
               </ListItem>
             </NavLink>
             <NavLink to="/signup" style={{ textDecoration: "none" }}>
@@ -196,7 +196,7 @@ export default function Layout({ children }) {
                 <ListItemIcon>
                   <ExitToAppIcon />
                 </ListItemIcon>
-                <ListItemText primary="Exit" />
+                <ListItemText style={{color:'#4B0082'}} primary="Выход" />
               </ListItem>
             </NavLink>
           </List>

@@ -26,11 +26,6 @@ module.exports.userController = {
         password: hash,
         // wallet: wallet,
       });
-      // if (!img) {
-      //   return res.json({
-      //     error: "img не найден",
-      //   });
-      // }
       if (!login) {
         return res.json({
           error: "login не найден",
@@ -41,12 +36,6 @@ module.exports.userController = {
           error: "password не найден",
         });
       }
-      // if (!wallet) {
-      //   return res.json({
-      //     error: "Кошелек не найден",
-      //   });
-      // }
-
       await res.json(user);
     } catch (e) {
       return res.status(400).json({
