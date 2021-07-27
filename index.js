@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const morgan = require('morgan')
 const app = express()
-// const path = require('path')
+const path = require('path')
 // const upload = require('express-fileupload')
 require('dotenv').config()
 
@@ -13,7 +13,11 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(require('./routes/index.route'))
+app.use(express.static(path.resolve(__dirname, "client", "build")))
 // app.use('/image', express.static(path.resolve(__dirname, 'image')))
+app.get("*", (req,res)=> {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+})
 
 const URL = process.env.URL
 const PORT = process.env.PORT
