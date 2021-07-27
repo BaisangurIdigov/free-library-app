@@ -15,16 +15,16 @@ module.exports.userController = {
 
   registerUser: async (req, res) => {
     try {
-      const {login, password} = req.body;
+      const { img, login, password, wallet } = req.body;
       const hash = await bcrypt.hash(
         password.toString(),
         Number(process.env.BCRYPT_ROUNDS)
       );
       const user = await User.create({
-        // img: img,
+        img: img,
         login: login,
         password: hash,
-        // wallet: wallet,
+        wallet: wallet,
       });
       if (!login) {
         return res.json({
