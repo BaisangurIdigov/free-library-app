@@ -84,7 +84,7 @@ export default function SignupPage() {
     setPassword({ ...password, [prop]: event.target.value });
   };
   const handleSubmit = () => {
-    dispatch(createUser(login, password));
+    dispatch(createUser(login, password.password));
   };
   return (
     <div
