@@ -10,7 +10,6 @@ render(
     <Provider store={store}>
       <BrowserRouter>
         <div
-
         >
           <App />
         </div>
