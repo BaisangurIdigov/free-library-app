@@ -64,13 +64,12 @@ export const createUser = (login, password) => {
         "Content-type": "application/json",
       },
     });
-
     const json = await response.json();
 
     if (json.error) {
       dispatch({ type: "application/signup/rejected", error: json.error });
     } else {
-      dispatch({ type: "application/signup/fulfilled", payload: json });
+      dispatch({ type: "application/signup/fulfilled", payload: json},);
     }
   };
 };
