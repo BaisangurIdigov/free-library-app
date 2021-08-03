@@ -55,7 +55,7 @@ module.exports.userController = {
       });
     }
 
-    const valid = await bcrypt.compare(password, candidate.password);
+    const valid = await bcrypt.compare(password.toString(), candidate.password);
     if (!valid) {
       return res.status(401).json({
         error: 'Неверный данные (password)'

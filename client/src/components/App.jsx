@@ -12,9 +12,6 @@ import Layout from './Layout'
 import { RentedBooks } from './pages/RentedBooks';
 import Book from './pages/BookDirectory/Book'
 
-
-
-
 function App(props) {
   const token = useSelector((state) => state.application.token);
   const [myBooks, setMyBooks] = useState("");

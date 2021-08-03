@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const app = express()
 const path = require('path')
+
 const upload = require('express-fileupload')
 require('dotenv').config()
 
@@ -14,7 +15,10 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(require('./routes/index.route'))
 app.use('/image', express.static(path.resolve(__dirname, 'image')))
-
+app.use(express.static(path.resolve(__dirname, "client", "build")))
+app.get("*", (req,res)=> {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+})
 const URL = process.env.URL
 const PORT = process.env.PORT
 
