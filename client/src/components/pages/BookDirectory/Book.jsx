@@ -73,6 +73,7 @@ function Book(props) {
   if (auth) {
     return (
       <>
+
         <div className={classes.content}>
           <BookCard />
           <Box className={classes.display}>
