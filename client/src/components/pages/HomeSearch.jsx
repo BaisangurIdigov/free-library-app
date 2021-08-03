@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 function HomeSearch({setBooks}) {
   const classes = useStyles();
+
   const handleChangeInput = (e) => {
     setBooks(e.target.value);
   };

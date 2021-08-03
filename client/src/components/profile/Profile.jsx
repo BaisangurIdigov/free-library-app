@@ -1,15 +1,18 @@
-import { Avatar, Box, Button, Paper } from "@material-ui/core";
+import { Avatar, Box, Button, Input, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUsersId } from "../../redux/features/users";
 import { auth } from '../../redux/features/application';
+import { addAvatar } from '../../redux/features/avatar';
+import { Info, PhotoCamera } from '@material-ui/icons';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
   profileCard: {
     position: 'relative',
     width: 600,
-    height: 370,
+    height: 400,
     marginLeft: "30%",
     marginRight: "30%",
     padding: 30,
@@ -34,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   userWallet: {
     position: 'absolute',
-    bottom:10,
+    bottom:-0,
     right: 410
   },
   usermail: {
@@ -45,12 +48,15 @@ const useStyles = makeStyles((theme) => ({
   userphone: {
     position: 'absolute',
     left: 350,
-    bottom: 150
+    bottom: 100
   },
   sum: {
     position: 'absolute',
     left: 350,
-    bottom: 10
+    bottom: -0
+  },
+  input: {
+
 
   }
 }));
@@ -61,6 +67,9 @@ function Profile() {
 
   const users = useSelector(state => state.users.items)
 
+  const handleAddAvatar = (e) => {
+    dispatch(addAvatar(e))
+  }
 
   useEffect(() => {
     dispatch(fetchUsersId());
@@ -77,6 +86,13 @@ function Profile() {
           <Box className={classes.profileBox}>
             <Box>
               <Avatar src={users.img} className={classes.large} />
+              <Input
+                className={classes.input}
+                accept="image/*"
+                id="icon-button-file"
+                type="file"
+                onChange={handleAddAvatar}
+              />
             </Box>
           </Box>
           <Box>

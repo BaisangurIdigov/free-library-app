@@ -6,11 +6,13 @@ import books from "./features/book";
 import users from "./features/users";
 import review from "./features/review";
 import rating from "./features/rating";
+import avatar from './features/avatar';
 
 export const store = createStore(
   combineReducers({
     application,
     books,
+      avatar,
     users,
     rating,
     review,

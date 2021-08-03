@@ -4,21 +4,21 @@ const cors = require('cors')
 const morgan = require('morgan')
 const app = express()
 const path = require('path')
-// const upload = require('express-fileupload')
+
+const upload = require('express-fileupload')
 require('dotenv').config()
 
-// app.use(upload({ debug: true}))
+app.use(upload({ debug: true}))
 app.use(cors())
-app.use(morgan('dev'))
+app.use(morgan("dev"))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(require('./routes/index.route'))
+app.use('/image', express.static(path.resolve(__dirname, 'image')))
 app.use(express.static(path.resolve(__dirname, "client", "build")))
-// app.use('/image', express.static(path.resolve(__dirname, 'image')))
 app.get("*", (req,res)=> {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
 })
-
 const URL = process.env.URL
 const PORT = process.env.PORT
 
@@ -27,7 +27,7 @@ async function start() {
     await mongoose.connect(URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      //useFindAndModify: true,
+      useFindAndModify: true,
       useCreateIndex: true
     });
     app.listen(PORT, () => {
