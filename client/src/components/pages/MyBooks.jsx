@@ -77,7 +77,7 @@ export default function MyBooks({ myBooks }) {
         <Box className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
           {books.map((item) => {
             return (
-              <Box className="col" align="center" key={item._id}>
+              <Box className="col" align="center" key={item._id} zIndex={1}>
                 <Box>
                   <Paper elevation={20} className={style.card}>
                     <img src={item.img} className={style.card__image} alt="" />

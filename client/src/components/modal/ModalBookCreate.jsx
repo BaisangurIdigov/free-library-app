@@ -20,7 +20,7 @@ const useStyle = makeStyles((theme) => ({
     width: 700,
     height: 650,
     marginTop: 100,
-    zIndex: 10,
+    zIndex: 100,
   },
   button: {
     textAlign: "right",

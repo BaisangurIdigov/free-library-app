@@ -92,7 +92,6 @@ export default function SignupPage() {
     >
       <Paper elevation={5} className={classes.signupUp}>
         {error ? <Alert severity="error">{"Логин занят"}</Alert> : ""}
-        {!error ? <Alert severity="success">{"Вы зарегистрированы"}{" : "}{" "}{<NavLink to={"/signin"}>Хотите войти?</NavLink>}</Alert> : ""}
         <h1>Регистрация</h1>
         <Box>
           <TextField
