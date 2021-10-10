@@ -75,7 +75,6 @@ export const createUser = (login, password) => {
 };
 
 export const auth = (login, password) => {
-  console.log(password)
   return async (dispatch) => {
     dispatch({ type: "application/signin/pending" });
 
