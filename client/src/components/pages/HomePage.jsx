@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRendBook, fetchBook } from "../../redux/features/book";
 import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
-import { Button, CircularProgress, Icon, Paper } from '@material-ui/core'
+import { Button, CircularProgress, Paper } from '@material-ui/core'
 import { NavLink } from "react-router-dom";
 import { fetchUsersId } from "../../redux/features/users";
 import ContactsIcon from '@material-ui/icons/ImportContacts'
@@ -71,7 +71,7 @@ export default function HomePage({ values }) {
       <Box className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
         {books.map((item) => {
           return (
-            <Box className="col" align="center">
+            <Box className="col" align="center" key={item._id}>
               <Paper className={style.card} elevation={20}>
                 <img src={item.img} className={style.card__image} alt="" />
                 <div className={style.card__overlay}>
@@ -106,7 +106,6 @@ export default function HomePage({ values }) {
                     <span className={classes.buttonAd}>Х</span>
                   ) : (
                     <Button
-                      style={{ marginBottom: 10 }}
                       onClick={()=> handleAddRendBook(item._id)}
                       variant="contained"
                       color="primary"
