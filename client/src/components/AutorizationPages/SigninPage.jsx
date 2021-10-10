@@ -66,7 +66,6 @@ export default function SigninPage() {
     showPassword: false,
   });
 
-  const signingIn = useSelector((state) => state.application.signingIn);
   const error = useSelector((state) => state.application.error);
 
   const handleClickShowPassword = () => {

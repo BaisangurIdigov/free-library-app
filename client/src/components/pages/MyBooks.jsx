@@ -45,10 +45,8 @@ export default function MyBooks({ myBooks }) {
       (item) => item.name.toLowerCase().indexOf(myBooks.toLowerCase()) !== -1
     );
   });
-  console.log(books);
   const error = useSelector((state) => state.books.error);
   const users = useSelector((state) => state.users.items);
-  const removing = useSelector((state)=> state.books.removing)
 
   const handleDeleteBook =(id)=> {
     dispatch(removeBooks(id))
@@ -79,7 +77,7 @@ export default function MyBooks({ myBooks }) {
         <Box className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
           {books.map((item) => {
             return (
-              <Box className="col" align="center">
+              <Box className="col" align="center" key={item._id}>
                 <Box>
                   <Paper elevation={20} className={style.card}>
                     <img src={item.img} className={style.card__image} alt="" />

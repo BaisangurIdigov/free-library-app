@@ -51,16 +51,16 @@ function Book(props) {
   const reviews = useSelector((state) => state.review.items);
 
   useEffect(() => {
-    dispatch(fetchBookById({ id }));
-  }, [dispatch]);
+    dispatch(fetchBookById( id ));
+  },[id]);
 
   useEffect(() => {
-    dispatch(fetchReviews({ id }));
-  }, [dispatch]);
+    dispatch(fetchReviews( id ));
+  },[id]);
 
   useEffect(() => {
-    dispatch(fetchRatings({ id }));
-  }, [dispatch]);
+    dispatch(fetchRatings( id ));
+  },[id]);
 
   if (loading) {
     return (
