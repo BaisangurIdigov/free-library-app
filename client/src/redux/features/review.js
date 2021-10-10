@@ -29,7 +29,6 @@ export default function review(state = initialState, action) {
         loading: true
       }
     case "create/review/fulfilled":
-      console.log(action)
       return {
         ...state,
         loading: false,
