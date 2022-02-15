@@ -36,11 +36,11 @@ const useStyle = makeStyles((theme) => ({
     margin: 10,
     borderRadius: 30,
     display: "flex",
-    width: 100
+    width: 100,
   },
   text: {
-    padding: 10
-  }
+    padding: 10,
+  },
 }));
 
 function Book(props) {
@@ -51,16 +51,16 @@ function Book(props) {
   const reviews = useSelector((state) => state.review.items);
 
   useEffect(() => {
-    dispatch(fetchBookById( id ));
-  },[id]);
+    dispatch(fetchBookById(id));
+  }, [id]);
 
   useEffect(() => {
-    dispatch(fetchReviews( id ));
-  },[id]);
+    dispatch(fetchReviews(id));
+  }, [id]);
 
   useEffect(() => {
-    dispatch(fetchRatings( id ));
-  },[id]);
+    dispatch(fetchRatings(id));
+  }, [id]);
 
   if (loading) {
     return (
@@ -73,7 +73,6 @@ function Book(props) {
   if (auth) {
     return (
       <>
-
         <div className={classes.content}>
           <BookCard />
           <Box className={classes.display}>
@@ -86,7 +85,7 @@ function Book(props) {
                 <>
                   <Paper className={classes.comments}>
                     <Avatar alt="Remy Sharp" src={item.user.img} />
-                    <Box style={{padding: 10}}>{item.user.login}{' '}│</Box>
+                    <Box style={{ padding: 10 }}>{item.user.login} │</Box>
                     <Box className={classes.text}>{item.text}</Box>
                   </Paper>
                 </>

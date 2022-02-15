@@ -9,8 +9,7 @@ render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <div
-        >
+        <div>
           <App />
         </div>
       </BrowserRouter>

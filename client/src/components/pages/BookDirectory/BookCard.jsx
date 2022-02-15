@@ -58,9 +58,7 @@ function BookCard(props) {
         <div className="col-md-6 ">
           <div className="card-body">
             <h5 className="card-title">{books.name}</h5>
-            <p className="card-text">
-              Описание: {' '}{books.description}
-            </p>
+            <p className="card-text">Описание: {books.description}</p>
           </div>
         </div>
       </div>

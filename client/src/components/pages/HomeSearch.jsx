@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HomeSearch({setBooks}) {
+function HomeSearch({ setBooks }) {
   const classes = useStyles();
 
   const handleChangeInput = (e) => {
@@ -45,17 +45,13 @@ function HomeSearch({setBooks}) {
           onChange={handleChangeInput}
         />
 
-        <Button
-          variant="contained"
-          color="primary"
-          disableElevation
-        >
+        <Button variant="contained" color="primary" disableElevation>
           <IconButton
             type="submit"
             className={classes.iconButton}
             aria-label="search"
           >
-            <SearchIcon style={{color: 'white'}}/>
+            <SearchIcon style={{ color: "white" }} />
           </IconButton>
         </Button>
       </Paper>

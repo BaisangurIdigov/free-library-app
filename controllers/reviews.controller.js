@@ -1,40 +1,41 @@
-const Review = require("../models/Review.model")
+const Review = require("../models/Review.model");
 
 module.exports.reviewsController = {
-  getReview: async (req, res)=> {
-    const reviews = await Review.find({ book: req.params.id }).populate("user").populate("book")
-    res.json(reviews)
+  getReview: async (req, res) => {
+    const reviews = await Review.find({ book: req.params.id })
+      .populate("user")
+      .populate("book");
+    res.json(reviews);
   },
   createReview: async (req, res) => {
-    const { text } = req.body
-    const { id } = req.params
+    const { text } = req.body;
+    const { id } = req.params;
     try {
       const created = await Review.create({
         book: id,
         user: req.user.id,
         text,
-      })
+      });
 
-       const review = await Review.findById(created._id).populate('user')
+      const review = await Review.findById(created._id).populate("user");
 
-      return res.json(review)
+      return res.json(review);
     } catch (e) {
-      return res.status(401).json(e.toString())
+      return res.status(401).json(e.toString());
     }
   },
   deleteReview: async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
 
     try {
-      const review = await Review.findById(id)
+      const review = await Review.findById(id);
 
-      if(review.user.toString() === req.user.id) {
-        await review.remove()
-        return res.json("Удалено")
+      if (review.user.toString() === req.user.id) {
+        await review.remove();
+        return res.json("Удалено");
       }
-
     } catch (e) {
-      return res.status(401).json("Ошибка: "+ e.toString())
+      return res.status(401).json("Ошибка: " + e.toString());
     }
-  }
-}
+  },
+};

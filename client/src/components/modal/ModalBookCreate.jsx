@@ -37,9 +37,9 @@ const useStyle = makeStyles((theme) => ({
   },
   center: {
     width: "100%",
-    display: 'flex',
-    justifyContent: 'center',
-  }
+    display: "flex",
+    justifyContent: "center",
+  },
 }));
 
 function ModalBookCreate({ opened, setOpened }) {
