@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from 'react'
-import { fetchBooks, removeBooks } from '../../redux/features/book'
+import React, { useEffect, useState } from "react";
+import { fetchBooks, removeBooks } from "../../redux/features/book";
 import { Box, Button, CircularProgress, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MyBooks({ myBooks }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const loading = useSelector((state) => state.books.loading);
   const books = useSelector((state) => {
     return state.books.items.filter(
@@ -48,9 +48,9 @@ export default function MyBooks({ myBooks }) {
   const error = useSelector((state) => state.books.error);
   const users = useSelector((state) => state.users.items);
 
-  const handleDeleteBook =(id)=> {
-    dispatch(removeBooks(id))
-  }
+  const handleDeleteBook = (id) => {
+    dispatch(removeBooks(id));
+  };
 
   useEffect(() => {
     dispatch(fetchBooks());
@@ -104,16 +104,19 @@ export default function MyBooks({ myBooks }) {
                       {open ? (
                         <>
                           <Box>Удалить?</Box>
-                          <Button variant="contained"
-                                  style={{ marginBottom: 5 }}
-                                  onClick={()=>setOpen(false)}>
+                          <Button
+                            variant="contained"
+                            style={{ marginBottom: 5 }}
+                            onClick={() => setOpen(false)}
+                          >
                             отмена
                           </Button>
-                          <Button variant="contained"
-                                  color="secondary"
-                                  style={{ marginBottom: 5 }}
-                                  onClick={()=>handleDeleteBook(item._id)}
-                            >
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            style={{ marginBottom: 5 }}
+                            onClick={() => handleDeleteBook(item._id)}
+                          >
                             удалить
                           </Button>
                         </>
@@ -123,14 +126,17 @@ export default function MyBooks({ myBooks }) {
                             style={{ textDecoration: "none" }}
                             to={`/book/${item._id}`}
                           >
-                            <Button variant="contained" style={{ marginBottom: 5 }}>
+                            <Button
+                              variant="contained"
+                              style={{ marginBottom: 5 }}
+                            >
                               Открыть
                             </Button>
                           </NavLink>
                           <IconButton
                             aria-label="delete"
                             className={classes.margin}
-                            onClick={()=>setOpen(true)}
+                            onClick={() => setOpen(true)}
                           >
                             <DeleteIcon />
                           </IconButton>

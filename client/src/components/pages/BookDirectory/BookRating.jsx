@@ -4,7 +4,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { Rating } from "@material-ui/lab";
 import { postRatings } from "../../../redux/features/rating";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 

@@ -18,7 +18,7 @@ export default function books(state = initialState, action) {
       return {
         ...state,
         removing: false,
-        items: state.items.filter((item) => item._id !== action.payload)
+        items: state.items.filter((item) => item._id !== action.payload),
       };
     case "remove/book/rejected":
       return {

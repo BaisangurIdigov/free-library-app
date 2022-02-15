@@ -1,8 +1,8 @@
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
- const path = require('path');
- const upload = require('express-fileupload')
+const path = require("path");
+const upload = require("express-fileupload");
 
 module.exports.userController = {
   getAllUsers: async (req, res) => {
@@ -10,9 +10,8 @@ module.exports.userController = {
     res.json(users);
   },
   getUsersId: async (req, res) => {
-
-    const user = await User.findById(req.user.id, { password: 0 })
-    await res.json(user)
+    const user = await User.findById(req.user.id, { password: 0 });
+    await res.json(user);
   },
 
   registerUser: async (req, res) => {
@@ -51,14 +50,14 @@ module.exports.userController = {
     const candidate = await User.findOne({ login });
     if (!candidate) {
       return res.status(401).json({
-        error: 'Неверный данные (login)'
+        error: "Неверный данные (login)",
       });
     }
 
     const valid = await bcrypt.compare(password.toString(), candidate.password);
     if (!valid) {
       return res.status(401).json({
-        error: 'Неверный данные (password)'
+        error: "Неверный данные (password)",
       });
     }
 
@@ -80,7 +79,7 @@ module.exports.userController = {
     const img = req.files.image;
     const fileName = `./image/${Math.random() * 10000} ${path.extname(
       img.name
-    )}`
+    )}`;
     img.mv(fileName, async (err) => {
       if (err) {
         return res.status(401).json("ошибка при добавлении авы");

@@ -7,10 +7,10 @@ import Profile from "./profile/Profile";
 import MyBooks from "./pages/MyBooks";
 import HomePage from "./pages/HomePage";
 import SearchInput from "./pages/SearchInput";
-import HomeSearch from './pages/HomeSearch'
-import Layout from './Layout'
-import { RentedBooks } from './pages/RentedBooks';
-import Book from './pages/BookDirectory/Book'
+import HomeSearch from "./pages/HomeSearch";
+import Layout from "./Layout";
+import { RentedBooks } from "./pages/RentedBooks";
+import Book from "./pages/BookDirectory/Book";
 
 function App(props) {
   const token = useSelector((state) => state.application.token);
@@ -44,8 +44,8 @@ function App(props) {
           </Route>
 
           <Route path="/" exact>
-            <HomeSearch setBooks={setBooks}/>
-            <HomePage values={books}/>
+            <HomeSearch setBooks={setBooks} />
+            <HomePage values={books} />
           </Route>
 
           <Route path="/MyBooks" exact>
@@ -54,11 +54,11 @@ function App(props) {
           </Route>
 
           <Route path="/rentBook" exact>
-            <RentedBooks/>
+            <RentedBooks />
           </Route>
 
           <Route path="/book/:id" exact>
-            <Book/>
+            <Book />
           </Route>
 
           <Redirect to="/" />

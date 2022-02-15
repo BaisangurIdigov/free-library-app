@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRendBook, fetchBook } from "../../redux/features/book";
 import style from "./style.module.css";
 import Box from "@material-ui/core/Box";
-import { Button, CircularProgress, Paper } from '@material-ui/core'
+import { Button, CircularProgress, Paper } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { fetchUsersId } from "../../redux/features/users";
-import ContactsIcon from '@material-ui/icons/ImportContacts'
-import AddIcon from '@material-ui/icons/Add';
+import ContactsIcon from "@material-ui/icons/ImportContacts";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles((themes) => ({
   content: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles((themes) => ({
     color: "red",
     fontSize: 24,
     marginLeft: 25,
-  }
+  },
 }));
 
 export default function HomePage({ values }) {
@@ -106,15 +106,14 @@ export default function HomePage({ values }) {
                     <span className={classes.buttonAd}>Х</span>
                   ) : (
                     <Button
-                      onClick={()=> handleAddRendBook(item._id)}
+                      onClick={() => handleAddRendBook(item._id)}
                       variant="contained"
                       color="primary"
                       disabled={addingToRend}
-                      style={{marginBottom:10, marginLeft:5}}
+                      style={{ marginBottom: 10, marginLeft: 5 }}
                     >
-                      <AddIcon/>
+                      <AddIcon />
                     </Button>
-
                   )}
                 </div>
               </Paper>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { auth } from "../../redux/features/application";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookRend, returningABook } from "../../redux/features/book";
-import { Box, Button, CircularProgress, Paper } from '@material-ui/core'
+import { Box, Button, CircularProgress, Paper } from "@material-ui/core";
 import style from "./style.module.css";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -67,10 +67,10 @@ export function RentedBooks(props) {
                       {item.description}
                     </p>
                     <Button
-                    className={style.card__description}
-                    onClick={() => handleReturningABook(item._id)}
+                      className={style.card__description}
+                      onClick={() => handleReturningABook(item._id)}
                     >
-                    Вернуть книгу
+                      Вернуть книгу
                     </Button>
                   </div>
                 </Paper>

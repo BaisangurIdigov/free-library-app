@@ -10,8 +10,8 @@ export default function application(state = initialState, action) {
     case "logout":
       return {
         ...state,
-        token: null
-      }
+        token: null,
+      };
     case "application/signup/pending":
       return {
         ...state,
@@ -69,7 +69,7 @@ export const createUser = (login, password) => {
     if (json.error) {
       dispatch({ type: "application/signup/rejected", error: json.error });
     } else {
-      dispatch({ type: "application/signup/fulfilled", payload: json},);
+      dispatch({ type: "application/signup/fulfilled", payload: json });
     }
   };
 };
